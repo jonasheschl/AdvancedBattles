@@ -34,28 +34,35 @@ public class Tile : MonoBehaviour
     }
 
     /**
+     * Handles the highlighting of the tile
      * Called when the selected unit is changed.
      */
     private void SelectedUnitChanged(object sender, (Unit oldValue, Unit newValue) e)
     {
-        if (e.oldValue == null && e.newValue != null) // Nothing was selected previously, selected a unit now
-        {
-            if (Utils.WithinRange(this, e.newValue) && LocalUnit == null)
-                Highlighter.Highlighted = true;
-        }
-        else if (e.oldValue != null && e.newValue == null) // A unit was previously selected, clicked an empty tile now
-        {
-            if (Utils.WithinRange(this, e.oldValue))
-                e.oldValue.Move(X, Y);
-            else
-                // Clicked an unreachable tile, deselect unit
-                GlobalData.SelectedUnit = null;
-        }
+        if (e.newValue != null && Utils.WithinRange(this, e.newValue)) 
+            // A new unit was selected. The selected unit is within moving range of this tile.
+            Highlighter.Highlighted = true;
+        else
+            // A unit was deselected of moved
+            Highlighter.Highlighted = false;
     }
 
+    /**
+     * Clicked this empty tile, if this tile is within moving range of the currently selected unit, move the unit there.
+     * Otherwise deselect the unit.
+     */
     public void OnMouseDown()
     {
-        GlobalData.SelectedUnit = null;
+        var unit = GlobalData.SelectedUnit;
+        // If a unit is selected
+        if (unit != null)
+        {
+            // If a unit is within range of this tile, move here
+            if (Utils.WithinRange(this, unit))
+                unit.Move(X, Y);
+            // Regardless to whether or not the unit moved, deselect it
+            GlobalData.SelectedUnit = null;
+        }
     }
 }
 
