@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UIElements;
 
 public class Unit : MonoBehaviour
@@ -20,6 +21,12 @@ public class Unit : MonoBehaviour
     [SerializeField] private int y;
     public int Y => y;
 
+    /**
+     * Team of this unit.
+     */
+    [SerializeField] private UnitTeam team;
+    public UnitTeam Team => team;
+    
     /**
      * The movement range of this unit.
      */
@@ -50,5 +57,11 @@ public class Unit : MonoBehaviour
     {
         if (GlobalData.SelectedUnit == null)
             GlobalData.SelectedUnit = this;
+    }
+
+    public enum UnitTeam
+    {
+        Blue,
+        Red
     }
 }
