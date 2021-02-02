@@ -1,0 +1,57 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &7701056519241524705
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1759663727789069262, guid: bbad89cca1cf7e02ea38af2bd62e17a4,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 4687136049273941376, guid: d75d36cf4adfc6a8fbfb00b0984abb95,
+        type: 3}
+    - target: {fileID: 1759663728226202190, guid: bbad89cca1cf7e02ea38af2bd62e17a4,
+        type: 3}
+      propertyPath: m_Name
+      value: unit_blue_tank
+      objectReference: {fileID: 0}
+    - target: {fileID: 1759663728226202224, guid: bbad89cca1cf7e02ea38af2bd62e17a4,
+        type: 3}
+      propertyPath: maxHealth
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 1759663728226202224, guid: bbad89cca1cf7e02ea38af2bd62e17a4,
+        type: 3}
+      propertyPath: movementPerTurn
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1759663728226202224, guid: bbad89cca1cf7e02ea38af2bd62e17a4,
+        type: 3}
+      propertyPath: attackDamage
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1759663728226202225, guid: bbad89cca1cf7e02ea38af2bd62e17a4,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1759663728226202225, guid: bbad89cca1cf7e02ea38af2bd62e17a4,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1759663728226202225, guid: bbad89cca1cf7e02ea38af2bd62e17a4,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1759663728226202225, guid: bbad89cca1cf7e02ea38af2bd62e17a4,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: bbad89cca1cf7e02ea38af2bd62e17a4, type: 3}
