@@ -7,6 +7,32 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -3624824042014689524, guid: 412189e393720116392840fd8aaba650,
+        type: 3}
+      propertyPath: m_SpriteTilingProperty.border.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -3624824042014689524, guid: 412189e393720116392840fd8aaba650,
+        type: 3}
+      propertyPath: m_SpriteTilingProperty.border.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -3624824042014689524, guid: 412189e393720116392840fd8aaba650,
+        type: 3}
+      propertyPath: m_SpriteTilingProperty.border.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -3624824042014689524, guid: 412189e393720116392840fd8aaba650,
+        type: 3}
+      propertyPath: m_SpriteTilingProperty.border.w
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1641225634015062653, guid: 412189e393720116392840fd8aaba650,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -53581991644025741, guid: b184ff129c4ea83a3b66c2e9d260967d,
+        type: 3}
     - target: {fileID: 8267472263262238772, guid: 412189e393720116392840fd8aaba650,
         type: 3}
       propertyPath: m_Sprite
@@ -71,7 +97,7 @@ PrefabInstance:
     - target: {fileID: 8267472263441176558, guid: 412189e393720116392840fd8aaba650,
         type: 3}
       propertyPath: m_Name
-      value: tile_grass
+      value: tile_plain
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 412189e393720116392840fd8aaba650, type: 3}

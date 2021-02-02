@@ -10,4 +10,7 @@ public static class Constants
     public const float TileHeight = 0.8f;
 
     public const string TagPlayingField = "PlayingField";
+
+    // ReSharper disable once InconsistentNaming
+    public const string TagUI_CompleteTurnButton = "UI_CompleteTurnButton";
 }

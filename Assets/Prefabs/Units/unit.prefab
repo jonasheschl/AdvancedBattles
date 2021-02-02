@@ -47,6 +47,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   x: -1
   y: -1
+  team: 0
   movement: -1
 --- !u!61 &7342165332090128024
 BoxCollider2D:
@@ -72,7 +73,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.25, y: 0.25}
+  m_Size: {x: 0.26, y: 0.26}
   m_EdgeRadius: 0
 --- !u!1 &7342165332727277351
 GameObject:

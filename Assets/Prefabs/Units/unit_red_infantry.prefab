@@ -16,7 +16,7 @@ PrefabInstance:
     - target: {fileID: 4400737616823833802, guid: 51b6e43cbfeeb98008872c9eaf4997b0,
         type: 3}
       propertyPath: movement
-      value: 5
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4400737616823833803, guid: 51b6e43cbfeeb98008872c9eaf4997b0,
         type: 3}
@@ -76,7 +76,7 @@ PrefabInstance:
     - target: {fileID: 4400737616823833844, guid: 51b6e43cbfeeb98008872c9eaf4997b0,
         type: 3}
       propertyPath: m_Name
-      value: unit_red
+      value: unit_red_infantry
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 51b6e43cbfeeb98008872c9eaf4997b0, type: 3}

@@ -39,12 +39,31 @@ public class Tile : MonoBehaviour
      */
     private void SelectedUnitChanged(object sender, (Unit oldValue, Unit newValue) e)
     {
-        if (e.newValue != null && Utils.WithinRange(this, e.newValue)) 
-            // A new unit was selected. The selected unit is within moving range of this tile.
-            Highlighter.Highlighted = true;
+        if (e.newValue != null)
+        {
+            // A new unit was selected
+             if (LocalUnit?.Team == e.newValue.Team &&
+                 Utils.WithinRange(this, e.newValue, e.newValue.RemainingTurnMovement))
+                // This tile is within movement range of the selected unit and there is a unit on this tile and this
+                // unit is of the same team as the selected unit.
+                // The selected unit can as such not move here
+                Highlighter.HighlightType = HighlightType.None;
+            else if (LocalUnit == null && 
+                     Utils.WithinRange(this, e.newValue, e.newValue.RemainingTurnMovement))
+                // This tile is within movement range of the selected unit and empty 
+                Highlighter.HighlightType = HighlightType.Move;
+            else if (LocalUnit?.Team != e.newValue.Team && LocalUnit?.Team != null &&
+                     Utils.WithinRange(this, e.newValue, e.newValue.RemainingTurnMovement + 1))
+                // There is a unit on this tile and this unit is not of the same team as the selected unit and this tile
+                // is within attacking distance of the selected unit.
+                // The selected unit can as such not move here, it can instead attack the unit on this tile
+                Highlighter.HighlightType = HighlightType.Attack;
+        }
         else
+        {
             // A unit was deselected of moved
-            Highlighter.Highlighted = false;
+            Highlighter.HighlightType = HighlightType.None;
+        }
     }
 
     /**
@@ -58,7 +77,7 @@ public class Tile : MonoBehaviour
         if (unit != null)
         {
             // If a unit is within range of this tile, move here
-            if (Utils.WithinRange(this, unit))
+            if (Utils.WithinRange(this, unit, unit.RemainingTurnMovement))
                 unit.Move(X, Y);
             // Regardless to whether or not the unit moved, deselect it
             GlobalData.SelectedUnit = null;

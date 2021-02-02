@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - PlayingField
+  - UI_CompleteTurnButton
+  - Controller
   layers:
   - Default
   - TransparentFX
