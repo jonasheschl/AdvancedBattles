@@ -27,6 +27,11 @@ PrefabInstance:
       propertyPath: m_SpriteTilingProperty.border.w
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -2561235917478695839, guid: 412189e393720116392840fd8aaba650,
+        type: 3}
+      propertyPath: defenseRating
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1641225634015062653, guid: 412189e393720116392840fd8aaba650,
         type: 3}
       propertyPath: m_Sprite

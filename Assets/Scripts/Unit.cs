@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.Serialization;
 using UnityEngine.UIElements;
@@ -27,6 +28,9 @@ public class Unit : MonoBehaviour
     [SerializeField] private UnitTeam team;
     public UnitTeam Team => team;
     
+    [SerializeField] private float attackDamage;
+    public float AttackDamage => attackDamage;
+    
     /**
      * The movement range of this unit.
      */
@@ -34,10 +38,39 @@ public class Unit : MonoBehaviour
     public int MovementPerTurn => movementPerTurn;
 
     public int RemainingTurnMovement { get; private set; }
+
+    [SerializeField] private float maxHealth;
+    public float MaxHealth => maxHealth;
+
+    public event EventHandler<(float oldValue, float newValue)> RemainingHealthChanged;
+    
+    private float _remainingHealth;
+    public float RemainingHealth
+    {
+        get => _remainingHealth;
+        private set
+        {
+            // Invoke the RemainingHealthChanged event
+            RemainingHealthChanged?.Invoke(null, (_remainingHealth, value));
+            
+            // Assign the new amount of remaining health. If this new amount would be below zero, assign zero instead
+            if (value >= 0)
+                _remainingHealth = value;
+            else
+                _remainingHealth = 0;
+        }
+    }
+
+    public Tile LocalTile => Utils.PlayingFieldRoot.TileDataAt(X, Y);
+
+    public bool hasAttacked = false;
     #endregion properties
 
     private void Awake()
     {
+        // Set the initial health
+        _remainingHealth = maxHealth;
+        
         // Adding the delegate to the event must be called before SerializeField variables are initialized.
         // Otherwise the method would not be called when the starting team is assigned to MovingTeam in TurnManager
         TurnManager.MovingTeamChanged += OnMovingTeamChanged;
@@ -54,6 +87,9 @@ public class Unit : MonoBehaviour
         
         // Reset the units RemainingTurnMovement
         RemainingTurnMovement = MovementPerTurn;
+        
+        // Reset the units ability to attack
+        hasAttacked = false;
     }
 
     public void Move(int toX, int toY)
@@ -80,10 +116,22 @@ public class Unit : MonoBehaviour
         // Moving done, deselect unit
         GlobalData.SelectedUnit = null;
     }
+
+    public void Damage(float damage)
+    {
+        // Assign the damage
+        RemainingHealth = _remainingHealth - damage;
+        
+        // If this unit has no health anymore, destroy it
+        if (RemainingHealth == 0)
+            Destroy(this.gameObject);
+    }
     
     public void OnMouseDown()
     {
-        if (GlobalData.SelectedUnit == null)
+        var selected = GlobalData.SelectedUnit;
+        // If no unit is selected, select this clicked unit
+        if (selected == null)
             GlobalData.SelectedUnit = this;
     }
 

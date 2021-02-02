@@ -55,19 +55,15 @@ public static class Utils
         }
     }
 
-    public static List<Unit> Units()
-    {
-        return PlayingFieldRoot
+    public static List<Unit> Units() =>
+        PlayingFieldRoot
             .GetComponentsInChildren<Unit>()
             .ToList();
-    }
 
-    public static List<Unit> UnitsOfTeam(Unit.UnitTeam team)
-    {
-        return Units()
+    public static List<Unit> UnitsOfTeam(Unit.UnitTeam team) =>
+        Units()
             .Where(unit => unit.Team == team)
             .ToList();
-    }
 
     public static Unit.UnitTeam OtherTeam(Unit.UnitTeam team)
     {
@@ -81,4 +77,27 @@ public static class Utils
         }
     }
 
+    /**
+     * Return true if the two given points are adjacent to each other. Returns false otherwise.
+     */
+    public static bool IsAdjacent(int x1, int y1, int x2, int y2) =>
+        Math.Abs(x1 - x2) <= 1 && Math.Abs(y1 - y2) <= 1;
+
+    /**
+     * Calculates the amount of damage dealt.
+     * See also: https://advancewars.fandom.com/wiki/Damage_Formula
+     *
+     * attackerDamage: The percentual damage dealt by the attacking unit to the defending unit
+     * attackerRemainingHealth: The current amount of health of the attacking unit
+     * defenseRating: The defense rating (amount of stars) of the tile the defender is located on
+     * defenderLostHealth: The amount of health the defender has already lost
+     */
+    public static float CalculateDamage(float attackerDamage,
+        float attackerRemainingHealth,
+        int defenseRating,
+        float defenderLostHealth)
+    {
+        var totalDamage = attackerDamage * (attackerRemainingHealth * 0.1f);
+        return totalDamage - defenseRating * ((totalDamage * 0.01f) - (totalDamage * 0.01f * defenderLostHealth));
+    }
 }

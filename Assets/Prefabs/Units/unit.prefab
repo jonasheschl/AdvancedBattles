@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 7342165332090128026}
   - component: {fileID: 7342165332090128027}
   - component: {fileID: 7342165332090128024}
+  - component: {fileID: 7384137187801043558}
   m_Layer: 0
   m_Name: unit
   m_TagString: Untagged
@@ -48,7 +49,9 @@ MonoBehaviour:
   x: -1
   y: -1
   team: 0
-  movement: -1
+  attackDamage: 0
+  movementPerTurn: -1
+  maxHealth: 0
 --- !u!61 &7342165332090128024
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -75,6 +78,29 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.26, y: 0.26}
   m_EdgeRadius: 0
+--- !u!114 &7384137187801043558
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7342165332090128037}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7dcf2ba1804bc135fa04fad68e9abe21, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  NumberZero: {fileID: 21300000, guid: e93c277695cb4fe57a4d6719d45362a2, type: 3}
+  NumberOne: {fileID: 21300000, guid: 4ad69bbdef414502fbd22a70b1cf53c1, type: 3}
+  NumberTwo: {fileID: 21300000, guid: baa9a7ea46a70e13bb6c2206a674115b, type: 3}
+  NumberThree: {fileID: 21300000, guid: 1ac34cfc76c45cdfabe50ab83f275b4b, type: 3}
+  NumberFour: {fileID: 21300000, guid: 0f17a7a5ca8ab0d89b065d40af8a8eb1, type: 3}
+  NumberFive: {fileID: 21300000, guid: 68fa49290bb3a0240ad437dec078283b, type: 3}
+  NumberSix: {fileID: 21300000, guid: 566ed5485ea99979bbfd4f0ee8e99e74, type: 3}
+  NumberSeven: {fileID: 21300000, guid: 8d63cec221fc9f77199c0b137cc36aa3, type: 3}
+  NumberEight: {fileID: 21300000, guid: db791b77607498ec783e2c97cf8a9827, type: 3}
+  NumberNine: {fileID: 21300000, guid: f65de7981320b4d04820ff36f888e0c5, type: 3}
+  NumberTen: {fileID: 21300000, guid: 47661fc00f0728c8a89795a9e3b9f392, type: 3}
 --- !u!1 &7342165332727277351
 GameObject:
   m_ObjectHideFlags: 0

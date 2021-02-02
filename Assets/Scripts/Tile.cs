@@ -17,6 +17,9 @@ public class Tile : MonoBehaviour
     [SerializeField] private int y;
     public int Y => y;
 
+    [SerializeField] private int defenseRating = 0;
+    public int DefenseRating => defenseRating;
+
     /**
      * Type of this tile.
      */
@@ -52,9 +55,12 @@ public class Tile : MonoBehaviour
                      Utils.WithinRange(this, e.newValue, e.newValue.RemainingTurnMovement))
                 // This tile is within movement range of the selected unit and empty 
                 Highlighter.HighlightType = HighlightType.Move;
-            else if (LocalUnit?.Team != e.newValue.Team && LocalUnit?.Team != null &&
+            else if (LocalUnit?.Team != e.newValue.Team &&
+                     LocalUnit?.Team != null &&
+                     e.newValue.hasAttacked == false &&
                      Utils.WithinRange(this, e.newValue, e.newValue.RemainingTurnMovement + 1))
-                // There is a unit on this tile and this unit is not of the same team as the selected unit and this tile
+                // There is a unit on this tile and this unit is not of the same team as the selected unit, the
+                // selected unit has not yet attacked during this turn and this tile
                 // is within attacking distance of the selected unit.
                 // The selected unit can as such not move here, it can instead attack the unit on this tile
                 Highlighter.HighlightType = HighlightType.Attack;
@@ -72,14 +78,32 @@ public class Tile : MonoBehaviour
      */
     public void OnMouseDown()
     {
-        var unit = GlobalData.SelectedUnit;
+        var selected = GlobalData.SelectedUnit;
         // If a unit is selected
-        if (unit != null)
+        if (selected != null)
         {
             // If a unit is within range of this tile, move here
-            if (Utils.WithinRange(this, unit, unit.RemainingTurnMovement))
-                unit.Move(X, Y);
-            // Regardless to whether or not the unit moved, deselect it
+            if (Utils.WithinRange(this, selected, selected.RemainingTurnMovement))
+                selected.Move(X, Y);
+
+            // If a unit is selected, the selected unit is of an enemy team, has not yet attacked during the current
+            // turn and is adjacent to this unit:
+            // the selected unit attacks this unit
+            if (Utils.IsAdjacent(X, Y, selected.X, selected.Y) &&
+                selected.hasAttacked == false &&
+                selected.Team != LocalUnit.Team)
+            {
+                // Calculate and apply the damage dealt by the selected unit to this unit
+                var damageDealt = Utils.CalculateDamage(selected.AttackDamage,
+                    selected.MaxHealth,
+                    this.DefenseRating,
+                    LocalUnit.MaxHealth - LocalUnit.RemainingHealth);
+                LocalUnit.Damage(damageDealt);
+
+                selected.hasAttacked = true;
+            }
+
+            // Regardless to whether or not the unit moved/attacked, deselect it
             GlobalData.SelectedUnit = null;
         }
     }

@@ -23,6 +23,21 @@ PrefabInstance:
       propertyPath: movement
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 1759663728226202224, guid: bbad89cca1cf7e02ea38af2bd62e17a4,
+        type: 3}
+      propertyPath: attackDamage
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1759663728226202224, guid: bbad89cca1cf7e02ea38af2bd62e17a4,
+        type: 3}
+      propertyPath: movementPerTurn
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1759663728226202224, guid: bbad89cca1cf7e02ea38af2bd62e17a4,
+        type: 3}
+      propertyPath: maxHealth
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 1759663728226202225, guid: bbad89cca1cf7e02ea38af2bd62e17a4,
         type: 3}
       propertyPath: m_LocalPosition.x
