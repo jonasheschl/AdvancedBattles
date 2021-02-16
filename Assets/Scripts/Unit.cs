@@ -66,6 +66,8 @@ public class Unit : MonoBehaviour
     public bool hasAttacked = false;
     #endregion properties
 
+    private EventHandler<(UnitTeam? oldValue, UnitTeam newValue)> movingTeamChangedHandler;
+    
     private void Awake()
     {
         // Set the initial health
@@ -73,11 +75,24 @@ public class Unit : MonoBehaviour
         
         // Adding the delegate to the event must be called before SerializeField variables are initialized.
         // Otherwise the method would not be called when the starting team is assigned to MovingTeam in TurnManager
-        TurnManager.MovingTeamChanged += OnMovingTeamChanged;
+        //
+        // In order for the handler to be able to remove itself whenever its corresponding unit is destroyed, a
+        // reference to the handler must be saved in the movingTeamChangedHandler variable.
+        movingTeamChangedHandler =  OnMovingTeamChanged;
+        TurnManager.MovingTeamChanged += movingTeamChangedHandler;
     }
 
     private void OnMovingTeamChanged(object sender, (UnitTeam? oldValue, UnitTeam newValue) e)
     {
+        // Whenever a unit is destroyed, its corresponding event handler in TurnManager.MovingTeamChanged is not
+        // removed. We must thus check for whether or not this (the unit instance) is null. In case it is, the
+        // listener removes itself from TurnManger.MovingTeamChanged an returns.
+        if (this == null)
+        {
+            TurnManager.MovingTeamChanged -= movingTeamChangedHandler;
+            return;
+        }
+
         // If the current team is this team, the unit can move
         // Otherwise it can not
         var unitEnabled = e.newValue == this.team;
